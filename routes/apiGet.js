@@ -7,6 +7,6 @@ router.post('/', function(req, res, next) {
   res.send(req.body);
 });
 router.get('/', function(req, res){
-  res.send(teams[0].nickname);
+  res.send(teams);
 });
 module.exports = router;
