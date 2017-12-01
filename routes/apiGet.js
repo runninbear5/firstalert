@@ -20,7 +20,7 @@ var teamSchema = new mongoose.Schema({
   team_number: String
 });
 var Teams = mongoose.model('Teams', teamSchema);
-router.post('/', function(req, res, next) {
+router.post('/team', function(req, res, next) {
   // Teams.find({_id: "frc120"}, function(err, data){
   //   console.log(data[0]._id);
   // });
