@@ -37,15 +37,15 @@ router.post('/team', function(req, res, next) {
       state_prov: req.body[i].state_prov,
       team_number: req.body[i].team_number
     });
-      Teams.find({_id: req.body[i].key}).remove(function(err, data){
-        if(err) throw err;
-      });
-      team.save(function(err){
-        if(err) throw err;
-      });
-      i++;
-    }
-  res.send("good");
+    Teams.find({_id: req.body[i].key}).remove(function(err, data){
+      if(err) throw err;
+    });
+    team.save(function(err){
+      if(err) throw err;
+    });
+  i++;
+  }
+res.send("good");
 });
 router.get('/', function(req, res){
   Teams.find({_id: "frc121"}, function(err, data){
