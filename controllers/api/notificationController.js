@@ -3,7 +3,7 @@ var sender = require('../emailSender')
 exports.tbaNotify = function(req, res){
   var msg = req.body;
   if(msg.message_type === "verification"){
-    sender.send(msg.message_data.verification_key);
+    sender.send(msg.message_data.verification_key, 'blakelieber@gmail.com');
     console.log("good");
   }
   else if(msg.message_type === "upcoming_match"){
