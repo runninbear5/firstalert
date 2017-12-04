@@ -19,9 +19,7 @@ var mail = function(message, email){
 
 exports.send = function(message, email){
   transporter.sendMail(mail(message, email), function (err, info) {
-     if(err)
-       console.log(err)
-     else
-       console.log(info);
+     if(err) console.log(err);
+    //   console.log(info);
   });
 }
