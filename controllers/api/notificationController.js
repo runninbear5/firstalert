@@ -23,6 +23,6 @@ exports.tbaNotify = function(req, res){
     minuites = Math.round(minuites);
     hours = Math.round(hours);
     email += ".\nThe event is at " + msg.message_data.event_name+".\nThe event is scheduled for "+hours+":"+minuites+":"+seconds;
-    sender.send(email, 'blakelieber@gmail.com');
+    sender.send(email, 'dlieber@gmail.com');
   }
 };
