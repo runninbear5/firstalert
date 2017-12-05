@@ -12,7 +12,7 @@ var mail = function(message, email){
     from: 'dragonchip14@gmail.com', // sender address
     to: email, // list of receivers
     subject: 'Subject of your email', // Subject line
-    html: '<p>'+message+'</p>'// plain text body
+    text: message// plain text body
   };
   return mailOptions;
 }
