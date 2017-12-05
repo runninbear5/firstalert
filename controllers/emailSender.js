@@ -1,13 +1,13 @@
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 //creating the email sender
-var transporter = nodemailer.createTransport(smtpTransport,{
+var transporter = nodemailer.createTransport(smtpTransport({
  service: 'gmail',
  auth: {
         user: 'dragonchip14@gmail.com',
         pass: 'k0d@Nation57'
     }
-});
+}));
 var mail = function(message, email){
   const mailOptions = {
     from: 'dragonchip14@gmail.com', // sender address
