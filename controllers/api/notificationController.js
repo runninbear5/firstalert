@@ -4,25 +4,80 @@ exports.tbaNotify = function(req, res){
   var msg = req.body;
   if(msg.message_type === "verification"){
     sender.send(msg.message_data.verification_key, 'blakelieber@gmail.com');
-    console.log("good");
   }
   else if(msg.message_type === "upcoming_match"){
-    var email = "The teams are ";
+    var email = "The teams are: ";
     var teams = msg.message_data.team_keys;
     var teamList = [];
     teams.forEach(function(team){
       email += team + ", ";
       teamList.push(team);
     });
-    res.send(teamList);
+    var time = "";
     var currentMilli = msg.message_data.scheduled_time;
     var seconds =  ((currentMilli/1000) % 60);
+    var add0Min = "0";
+    var add0Sec = "0";
     var minuites = ((currentMilli/(1000*60)) % 60);
     var hours =  ((currentMilli/(1000*60*60)) % 12);
     seconds = Math.round(seconds);
     minuites = Math.round(minuites);
     hours = Math.round(hours);
-    email += ".\nThe event is at " + msg.message_data.event_name+".\nThe event is scheduled for "+hours+":"+minuites+":"+seconds;
-    sender.send(email, 'dlieber@gmail.com');
+    if((currentMilli/(1000*60*60)) % 24 > 12){
+        time = "am";
+    }else{
+        time = "pm";
+    }
+    if(((currentMilli/(1000*60)) % 60) < 10){
+       add0Min = "0";
+    }else{
+        add0Min = "";
+    }
+    if(((currentMilli/(1000)) % 60) < 10){
+       add0Sec = "0";
+    }else{
+        add0Sec = "";
+    }
+    email += "\nThe event is at " + msg.message_data.event_name+".\nThe event is scheduled for "+hours+":"+add0Min+minuites+":"+add0Sec+seconds+time;
+    sender.send(email, 'blakelieber@gmail.com');
+  }else if(msg.message_type === "match_score"){
+    var winningTeam = "";
+    var redScore = msg.message_data.match.alliances.red.score;
+    var blueScore = msg.message_data.match.alliances.blue.score;
+    var email = "The event name is " +msg.message_data.event_name+" and the match number is "+msg.message_data.match.match_number+".\n";
+    if(blueScore > redScore){
+      email += "The blue team won with a score of " +blueScore+ " to " +redScore+".\n";
+    }else if(redScore > blueScore){
+      email += "The red team won with a score of " +redScore+ " to " +blueScore+".\n";
+    }else{
+      email += "The teams tied with a score of " +redScore+".\n";
+    }
+    email += "The teams on blue teams are ";
+    var teams = msg.message_data.match.alliances.blue.teams;
+    var teamList = [];
+    teams.forEach(function(team){
+      teamList.push(team);
+    });
+    teams = msg.message_data.match.alliances.red.teams;
+    teams.forEach(function(team){
+      teamList.push(team);
+    });
+    for(var i=0; i<3; i++){
+      if(i<2){
+        email += teamList[i] + ", ";
+      }else if(i===2){
+        email += teamList[i] +".\n";
+      }
+    }
+    email += "The teams on red team are ";
+    for(var i=3; i<6; i++){
+      if(i<5){
+        email += teamList[i] + ", ";
+      }else if(i===5){
+        email += teamList[i] +".\n";
+      }
+    }
+    sender.send(email, "blakelieber@gmail.com")
+    res.send("good");
   }
 };
