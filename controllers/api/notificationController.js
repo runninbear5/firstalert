@@ -66,7 +66,7 @@ var matchScore = function(msg){
   }else{
     email += "The teams tied with a score of " +redScore+".\n";
   }
-  email += "The teams on blue teams are ";
+  email += "The teams on blue alliance are ";
   var teams = msg.message_data.match.alliances.blue.teams;
   var teamList = [];
   teams.forEach(function(team){
@@ -83,7 +83,7 @@ var matchScore = function(msg){
       email += teamList[i] +".\n";
     }
   }
-  email += "The teams on red team are ";
+  email += "The teams on red alliance are ";
   for(var i=3; i<6; i++){
     if(i<5){
       email += teamList[i] + ", ";
