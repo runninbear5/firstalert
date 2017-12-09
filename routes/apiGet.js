@@ -48,7 +48,7 @@ router.post('/team', function(req, res, next) {
 res.send("good");
 });
 router.get('/', function(req, res){
-  Teams.find({_id: "frc121"}, function(err, data){
+  Teams.find({nickname: "NASA Knights"}, function(err, data){
     if(err) throw err;
     res.send(data[0].nickname);
   });
