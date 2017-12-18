@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+  head
+    link(href='../../public/stylesheets/bootstrap.min.css', rel='stylesheet')
+    link(href='../../public/stylesheets/loginButtons.css')
+    main(role='main')
+      // Main jumbotron for a primary marketing message or call to action
+      .jumbotron
+        .kpx_login
+          h3.kpx_authTitle
+            | Login or 
+            | Sign up
+            p
+              | Please login so we can send you emails and know what teams you want to be notified about
+          .col-xs-2.col-sm-2
+            a.btn.btn-lg.btn-block.kpx_btn-google-plus(href='/auth/google', data-toggle='tooltip', data-placement='top', title='Google Plus', style= {background: '#c32f10'})
+              i.fa.fa-google-plus.fa-2x
+                span.hidden-xs(style={color: 'white'})
+                  |Google Plus
+      script.
+        $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+        })
+
+
+
+  
