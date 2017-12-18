@@ -23,6 +23,6 @@ TeamSchema.statics.findByNumberOrName = function(val, cb) {
   var regEx = new RegExp(`/${val.trim()}/i`)
   return this.findOne({ $or: [{ name: regEx }, { team_number: regEx }]}, cb).sort( { team_number: 1 } );
 }
-
+  
 
 module.exports = mongoose.model('Team', TeamSchema);

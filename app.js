@@ -11,6 +11,7 @@ var home  = require('./routes/home');
 var users = require('./routes/users');
 var api   = require('./routes/api');
 var admin = require('./routes/admin');
+var auth = require('./routes/auth');
 
 var app = express();
 
@@ -37,8 +38,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', home);
 app.use('/users', users);
 app.use('/api', api);
+<<<<<<< HEAD
 app.use('/admin', admin);
 
+=======
+app.use('/auth', auth);
+//app.use('/auth', api);
+>>>>>>> b8dce8468b36ceb49d83012c62a37e3b83eb1d77
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
