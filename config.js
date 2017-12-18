@@ -1,23 +1,32 @@
+require('dotenv').config()
+
+const env = process.env.NODE_ENV;
+
 var config = {
     db: {
         type: 'mongodb',
         host: 'ds161016.mlab.com:61016',
         dbname: 'om_lieberlerts',
-        username: 'app_user',
-        password: 'testing123'
+        username: process.env.DB_USER,
+        password: process.env.DB_PWD
     },
     auth: {
         google: {
-            clientID: "826465670781-51ktnva0pfdd69h2v5thekp4qn8uv4us.apps.googleusercontent.com",
-            clientSecret: "uwtOvjdRxVkq4cXWoU9pBbk8",
+            clientID: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
             callbackURL: "http://localhost:3000/auth/google/callback"
         }
     },
     tba: {
         api_url: 'https://www.thebluealliance.com/api/v3',
-        api_key: 'J9XyDSN69eZMHqanEDaevzAywDjxL9iyBYAQh2erLJJ9MtZVG60HsEYeKVwloFGe'
+        api_key: process.env.TBA_API_KEY
     }
 };
+
+// override production settings
+if (env == 'production') {
+    config.auth.google.callbackURL = "http://lieberlerts.herokuapp.com/auth/google/callback"
+}
 
 // export
 module.exports = config;
