@@ -4,6 +4,8 @@ var favicon       = require('serve-favicon');
 var logger        = require('morgan');
 var cookieParser  = require('cookie-parser');
 var bodyParser    = require('body-parser');
+var session       = require("express-session");
+var passport      = require('passport');
 var mongoose      = require('mongoose');
 var config        = require('./config.js');
 
@@ -11,17 +13,16 @@ var home  = require('./routes/home');
 var users = require('./routes/users');
 var api   = require('./routes/api');
 var admin = require('./routes/admin');
-var auth = require('./routes/auth');
+var auth  = require('./routes/auth');
 
 var app = express();
 
 // db config
 var mongoDB = `mongodb://${config.db.username}:${config.db.password}@${config.db.host}/${config.db.dbname}`;
-mongoose.connect(mongoDB, { useMongoClient: true });
 mongoose.Promise = global.Promise;
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+mongoose.connect(mongoDB, { useMongoClient: true })
+  .then(() =>  console.log('connection successful'))
+  .catch((err) => console.error(err));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,6 +30,11 @@ app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+app.use(session({ secret: 'team parad0x', resave: true, saveUninitialized: true}));
+app.use(passport.initialize())
+app.use(passport.session())
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
