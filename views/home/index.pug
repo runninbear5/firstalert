@@ -1,15 +1,5 @@
 extends ../layout
 
 block content
-  head
-    main(role='main')
-      // Main jumbotron for a primary marketing message or call to action
-      .jumbotron
-        .container
-          h1.display-3 Welcome to Lieberlerts
-          p
-            | We will send you emails or texts about upcoming events for teams you signed up for. 
-        hr
-      // /container
-    footer.container
-      p © Company 2017
+  h1= title
+  p Welcome to #{title} this is cool
