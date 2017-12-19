@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var controller = require('../controllers/authController');
+var controller = require('../controllers/authController1');
 
 router.get('/google', controller.authenticate);
 
