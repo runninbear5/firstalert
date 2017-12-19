@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 .require('dotenv').config()
+=======
+require('dotenv').config()
+>>>>>>> 078250b52aab1e1c475704994181e7e10a18f73b
 
 const env = process.env.NODE_ENV;
 
@@ -29,4 +33,8 @@ if (env == 'production') {
 }
 
 // export
+<<<<<<< HEAD
 module.exports = config;
+=======
+module.exports = config;
+>>>>>>> 078250b52aab1e1c475704994181e7e10a18f73b
