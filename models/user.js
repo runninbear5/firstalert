@@ -9,14 +9,14 @@ var UserSchema = new Schema({
   email: { type:String, trim: true },
   mobile: { type: String, trim: true },
   verification_status: { type: String, required: true, enum: ['Unverified, Verified'], default: 'Unverified' },
-  created_at: { type: Date, default: Date.now },
+  // created_at: { type: Date, default: Date.now },
+  //
+  // notification_settings: {
+  //   phone: { is_enabled: {type:Boolean, default: false }},
+  //   email: { is_enabled: {type:Boolean, default: true }}
+  // },
 
-  notification_settings: { 
-    phone: { is_enabled: Boolean, default: false },
-    email: { is_enabled: Boolean, default: true }
-  },
-  
-  teams: [{ type: Schema.Types.ObjectId, ref: 'Team'}]
+//  teams: [{ type: Schema.Types.ObjectId, ref: 'Team'}]
 });
 
 UserSchema
