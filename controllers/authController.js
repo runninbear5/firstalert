@@ -12,10 +12,6 @@ passport.use(new GoogleStrategy({
   function(accessToken, refreshToken, profile, done) {
     var updateOptions = { upsert: true, new: true, setDefaultsOnInsert: true };
     var query = { _id: profile.emails[0].value };
-    var verified = 'Unverified';
-    if(profile._json.verified){
-      verified = 'Verified'
-    }
 
     var update = {
       _id: profile.emails[0].value,
