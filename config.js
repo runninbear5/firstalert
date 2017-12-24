@@ -19,6 +19,10 @@ var config = {
     tba: {
         api_url: 'https://www.thebluealliance.com/api/v3',
         api_key: process.env.TBA_API_KEY
+    },
+    email: {
+        email_address: process.env.NOTI_EMAIL,
+        email_password: process.env.NOTI_PASS
     }
 };
 

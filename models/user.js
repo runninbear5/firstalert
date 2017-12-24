@@ -3,18 +3,18 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-  _id: { type: String},
+  _id:  String,
   first_name: { type: String, trim: true },
   last_name: { type: String, trim: true },
   email: { type:String, trim: true },
   mobile: { type: String, trim: true },
-  verification_status: { type: String, required: true, enum: ['Unverified, Verified'], default: 'Unverified' },
-  // created_at: { type: Date, default: Date.now },
+  verification_status: { type: Boolean, required: true, default: 'false' },
+  created_at: { type: Date, default: Date.now },
   //
-  // notification_settings: {
-  //   phone: { is_enabled: {type:Boolean, default: false }},
-  //   email: { is_enabled: {type:Boolean, default: true }}
-  // },
+  notification_settings: {
+    phone: { is_enabled: {type:Boolean, default: false }},
+    email: { is_enabled: {type:Boolean, default: true }}
+  },
 
 //  teams: [{ type: Schema.Types.ObjectId, ref: 'Team'}]
 });
@@ -31,4 +31,4 @@ UserSchema.statics.findByEmail = function(val, cb) {
 }
 
 
-module.export = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);
