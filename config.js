@@ -28,7 +28,7 @@ var config = {
 
 // override production settings
 if (env == 'production') {
-    config.auth.google.callbackURL = "http://lieberlerts.herokuapp.com/auth/google/callback"
+    config.auth.google.callbackURL = "https://lieberlerts.herokuapp.com/auth/google/callback"
 }
 
 // export
