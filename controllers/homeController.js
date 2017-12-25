@@ -4,5 +4,6 @@ exports.home = function(req, res, next) {
 };
 
 exports.login = function(req, res, next)  {
+  console.log(req.user);
   res.render('home/login', { title: 'Express'});
 };
