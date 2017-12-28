@@ -1,17 +1,4 @@
 extends ../layout
-//- block user
-//-   - var user = request.user
-//-   if user
-//-     if user.first_name
-//-       |Welcome back #{request.user.first_name}
-//-     else
-//-       |Welcome back #{request.user.email}
-//-     ul.navbar-nav.float: right
-//-       li.nav-item
-//-         a.nav-link(href='/login')
-//-           |Logout
-  else
-    |login
 block content
   head
     link(href='../../public/stylesheets/loginButtons.css')
