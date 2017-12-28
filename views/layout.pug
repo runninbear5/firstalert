@@ -29,6 +29,8 @@ html(lang='en')
         ul.navbar-nav.mr-auto
           li.nav-item
             a.nav-link(href='#') Teams
+          li.nav-item 
+            a.nav-link(href='/settings') Settings
           form.form-inline
             input.form-control.mr-sm-2(type='text', placeholder='Search', aria-label='Search')
             button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
@@ -47,7 +49,7 @@ html(lang='en')
         if req.user
           ul.navbar-nav.float: right
             li.nav-item
-              a.nav-link(href='/') Logout
+              a.nav-link(href='/logout') Logout
     block content
       
     // jQuery first, then Popper.js, then Bootstrap JS

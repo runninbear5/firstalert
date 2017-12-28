@@ -11,5 +11,17 @@ block variable
 //-   else
 //-     |login
 block content
-  h1= title
-  p Welcome to #{title} this is cool
+  head
+  link(href='../../public/stylesheets/loginButtons.css')
+  main(role='main')
+    // Main jumbotron for a primary marketing message or call to action
+    .jumbotron
+      .kpx_login
+        h3.kpx_authTitle
+          | #{title} 
+        p
+          |Welcome to #{title}. Here we will send you notifications about your teams, giving you match updates and scores.
+        p
+          |Login and select your teams. We would also like to know if you prefer texts, emails, or both.
+        p
+          |Thanks for signing up and we hope to see you at competition
