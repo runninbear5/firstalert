@@ -19,7 +19,7 @@ passport.use(new GoogleStrategy({
       first_name: profile.name.givenName,
       last_name : profile.name.familyName,
       email: profile.emails[0].value,
-      verification_status: profile._json.verified
+      verification_status: profile._json.verified,
     };
 
     AppUser.findByIdAndUpdate(query, update, updateOptions, function(err, res){

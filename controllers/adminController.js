@@ -26,15 +26,15 @@ function upsertTeams(page, next) {
             teams.forEach(team => {
                 var query = { _id: team.key };
 
-                var update = { 
-                    _id: team.key, 
-                    city: team.city, 
-                    country: team.country, 
-                    key: team.key, 
-                    name: team.name, 
+                var update = {
+                    _id: team.key,
+                    city: team.city,
+                    country: team.country,
+                    key: team.key,
+                    name: team.name,
                     nickname: team.nickname,
-                    state_prov: team.state_prov, 
-                    team_number: team.team_number 
+                    state_prov: team.state_prov,
+                    team_number: team.team_number
                 };
 
                 // upsert the team

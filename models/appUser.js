@@ -16,7 +16,8 @@ var AppUserSchema = new Schema({
     email:             { is_enabled: {type:Boolean, default: true }}
   },
 
-  teams:               [{ type: Schema.Types.ObjectId, ref: 'Team'}]
+  //teams:               [{ type: Schema.Types.ObjectId, ref: 'Team'}]
+  teams: [String]
 });
 
 AppUserSchema
