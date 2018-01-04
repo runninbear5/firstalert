@@ -1,4 +1,5 @@
-var sender = require('../emailSender')
+var sender = require('../emailSender');
+var appUser = require('../../models/appUser');
 
 exports.tbaNotify = function(req, res){
   var msg = req.body;
@@ -22,7 +23,8 @@ var upcomingMatch = function(msg){
   var teams = msg.message_data.team_keys;
   var teamList = [];
   teams.forEach(function(team){
-    email += team + ", ";
+    var nonKeyTeam = team.substring(3);
+    email += nonKeyTeam + ", ";
     teamList.push(team);
   });
   var time = "";
@@ -51,7 +53,23 @@ var upcomingMatch = function(msg){
       add0Sec = "";
   }
   email += "\nThe event is at " + msg.message_data.event_name+".\nThe event is scheduled for "+hours+":"+add0Min+minuites+":"+add0Sec+seconds+time;
-  sender.send(email, 'blakelieber@gmail.com');
+  var usersSent = [];
+  teamList.forEach(function(team){
+    appUser.find({teams: team}, function(err, data){
+      data.forEach(function(user){
+        var send = true;
+        usersSent.forEach(function(sentUsers){
+          if(sentUsers === user.email){
+            send = false;
+          }
+        })
+        if(send){
+          usersSent.push(user.email);
+          sender.send(email, user.email);
+        }
+      })
+    });
+  })
 };
 
 var matchScore = function(msg){
@@ -70,11 +88,13 @@ var matchScore = function(msg){
   var teams = msg.message_data.match.alliances.blue.teams;
   var teamList = [];
   teams.forEach(function(team){
-    teamList.push(team);
+    var nonKeyTeam = team.substring(3);
+    teamList.push(nonKeyTeam);
   });
   teams = msg.message_data.match.alliances.red.teams;
   teams.forEach(function(team){
-    teamList.push(team);
+    var nonKeyTeam = team.substring(3);
+    teamList.push(nonKeyTeam);
   });
   for(var i=0; i<3; i++){
     if(i<2){
@@ -91,5 +111,21 @@ var matchScore = function(msg){
       email += teamList[i] +".\n";
     }
   }
-  sender.send(email, "blakelieber@gmail.com")
+  var usersSent = [];
+  teamList.forEach(function(team){
+    appUser.find({teams: 'frc'+team}, function(err, data){
+      data.forEach(function(user){
+        var send = true;
+        usersSent.forEach(function(sentUsers){
+          if(sentUsers === user.email){
+            send = false;
+          }
+        })
+        if(send){
+          usersSent.push(user.email);
+          sender.send(email, user.email);
+        }
+      })
+    });
+  })
 };

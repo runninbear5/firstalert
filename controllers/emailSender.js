@@ -14,7 +14,7 @@ var mail = function(message, email){
   const mailOptions = {
     from: 'dragonchip14@gmail.com', // sender address
     to: email, // list of receivers
-    subject: 'Subject of your email', // Subject line
+    subject: 'Lieberlerts Notification', // Subject line
     text: message// plain text body
   };
   return mailOptions;
