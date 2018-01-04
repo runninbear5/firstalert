@@ -14,6 +14,7 @@ var users = require('./routes/users');
 var api   = require('./routes/api');
 var admin = require('./routes/admin');
 var auth  = require('./routes/auth');
+var teams = require('./routes/teams');
 
 var app = express();
 
@@ -46,7 +47,7 @@ app.use('/users', users);
 app.use('/api', api);
 app.use('/admin', admin);
 app.use('/auth', auth);
-
+app.use('/teams', teams);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

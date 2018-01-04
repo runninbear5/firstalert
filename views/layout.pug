@@ -6,6 +6,7 @@ html(lang='en')
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
     // Bootstrap CSS
+    link(href='../../public/stylesheets/style.css')
   link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css', integrity='sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb', crossorigin='anonymous')
   body
     meta(charset='utf-8')
@@ -32,7 +33,7 @@ html(lang='en')
           li.nav-item 
             a.nav-link(href='/settings') Settings
           form.form-inline
-            input.form-control.mr-sm-2(type='text', placeholder='Search', aria-label='Search')
+            input.form-control.mr-sm-2(type='text', placeholder='Search', aria-label='Search', name = 'q', id='mySearch')
             button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
         ul.navbar-nav.float: right(style={color: 'white'})
           if req.user

@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+.navbar-logo{
+  width: 18px;
+  height: 18px;
+}

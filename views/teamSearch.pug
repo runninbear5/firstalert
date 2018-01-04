@@ -1,0 +1,30 @@
+extends ./layout
+
+block variable
+  -var req = request
+block content  
+  head
+    link(href='../../public/stylesheets/loginButtons.css')
+    main(role='main')
+      // Main jumbotron for a primary marketing message or call to action
+      .jumbotron
+        .kpx_login
+          h3.kpx_authTitle
+            table(style='width:100%')
+              tr
+                th Team Number
+                th Team Name
+                th Subscribe to Team
+                -var i=0;
+                -var length = teams.length;
+                -if(length>15) {length=15;}
+                -console.log(req.query.q);
+                while i<length
+                  tr  
+                    td 
+                      | #{teams[i].team_number}
+                    td
+                      | #{teams[i].nickname}
+                    td
+                      a.nav-link(href='/teams/subscribe?team='+teams[i].team_number+'&q='+req.query.q) Subscribe
+                  -i++;
