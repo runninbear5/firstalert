@@ -26,5 +26,15 @@ block content
                     td
                       a.nav-link(href='https://www.thebluealliance.com/team/'+teams[i].team_number) #{teams[i].nickname}
                     td
-                      a.nav-link(href='/teams/subscribe?team='+teams[i].team_number+'&q='+req.query.q) Subscribe
+                      -var j=0;
+                      -var subscribed = false;
+                      -var teamsLength = req.user.teams.length;
+                      while j<teamsLength
+                        -var team = req.user.teams[j];
+                        if team === teams[i]._id
+                          | Subscribed
+                          -subscribed = true;
+                        -j++;
+                      if !subscribed
+                        a.nav-link(href='/teams/subscribe?team='+teams[i].team_number+'&q='+req.query.q) Subscribe
                   -i++;
