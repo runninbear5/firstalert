@@ -22,9 +22,9 @@ block content
                 while i<length
                   tr  
                     td 
-                      | #{teams[i].team_number}
+                      a.nav-link(href='https://www.thebluealliance.com/team/'+teams[i].team_number) #{teams[i].team_number}
                     td
-                      | #{teams[i].nickname}
+                      a.nav-link(href='https://www.thebluealliance.com/team/'+teams[i].team_number) #{teams[i].nickname}
                     td
                       a.nav-link(href='/teams/subscribe?team='+teams[i].team_number+'&q='+req.query.q) Subscribe
                   -i++;
