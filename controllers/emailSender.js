@@ -10,18 +10,18 @@ var transporter = nodemailer.createTransport(smtpTransport({
         pass: ''+config.email.email_password
     }
 }));
-var mail = function(message, email){
+var mail = function(message, subject, email){
   const mailOptions = {
     from: 'dragonchip14@gmail.com', // sender address
     to: email, // list of receivers
-    subject: 'Lieberlerts Notification', // Subject line
+    subject: subject, // Subject line
     text: message// plain text body
   };
   return mailOptions;
 }
 
-exports.send = function(message, email){
-  transporter.sendMail(mail(message, email), function (err, info) {
+exports.send = function(message, subject, email){
+  transporter.sendMail(mail(message, subject, email), function (err, info) {
      if(err) console.log(err);
     //   console.log(info);
   });

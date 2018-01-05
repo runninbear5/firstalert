@@ -15,15 +15,17 @@ exports.tbaNotify = function(req, res){
 };
 
 var verification = function(msg){
-  sender.send(msg.message_data.verification_key, 'blakelieber@gmail.com');
+  sender.send(msg.message_data.verification_key, 'Verification', 'blakelieber@gmail.com');
 };
 
 var upcomingMatch = function(msg){
-  var email = "The teams are: ";
+  var email = "Upcoming Match for ";
+  var subject = "Upcoming Match for ";
   var teams = msg.message_data.team_keys;
   var teamList = [];
   teams.forEach(function(team){
     var nonKeyTeam = team.substring(3);
+    subject += nonKeyTeam + ", ";
     email += nonKeyTeam + ", ";
     teamList.push(team);
   });
@@ -38,9 +40,9 @@ var upcomingMatch = function(msg){
   minuites = Math.round(minuites);
   hours = Math.round(hours);
   if((currentMilli/(1000*60*60)) % 24 > 12){
-      time = "am";
+      time = " am";
   }else{
-      time = "pm";
+      time = " pm";
   }
   if(((currentMilli/(1000*60)) % 60) < 10){
      add0Min = "0";
@@ -65,7 +67,7 @@ var upcomingMatch = function(msg){
         })
         if(send){
           usersSent.push(user.email);
-          sender.send(email, user.email);
+          sender.send(email, subject, user.email);
         }
       })
     });
@@ -77,6 +79,7 @@ var matchScore = function(msg){
   var redScore = msg.message_data.match.alliances.red.score;
   var blueScore = msg.message_data.match.alliances.blue.score;
   var email = "The event name is " +msg.message_data.event_name+" and the match number is "+msg.message_data.match.match_number+".\n";
+  var subject = "Match Score for Teams ";
   if(blueScore > redScore){
     email += "The blue team won with a score of " +blueScore+ " to " +redScore+".\n";
   }else if(redScore > blueScore){
@@ -89,11 +92,13 @@ var matchScore = function(msg){
   var teamList = [];
   teams.forEach(function(team){
     var nonKeyTeam = team.substring(3);
+    subject += nonKeyTeam + ", ";
     teamList.push(nonKeyTeam);
   });
   teams = msg.message_data.match.alliances.red.teams;
   teams.forEach(function(team){
     var nonKeyTeam = team.substring(3);
+    subject += nonKeyTeam + ", ";
     teamList.push(nonKeyTeam);
   });
   for(var i=0; i<3; i++){
@@ -123,7 +128,7 @@ var matchScore = function(msg){
         })
         if(send){
           usersSent.push(user.email);
-          sender.send(email, user.email);
+          sender.send(email, subject, user.email);
         }
       })
     });
