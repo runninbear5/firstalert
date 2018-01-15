@@ -1,16 +1,27 @@
 var request = require('request');
-var config = require('../config')
-
+var config = require('../config');
 var Team = require('../models/team');
+var fs = require('fs');
 
 exports.populateTeams = function(req, res, next) {
 
     var startPageNum = 0;
-
     upsertTeams(startPageNum, function() {
+        getTeams();
         res.send('Done');
     });
 };
+
+getTeams = function(req, res, next){
+  var teams = [];
+  Team.find({}, function(err, data){
+    data.forEach(function(team){
+      teams.push(team.team_number +" | " + team.nickname);
+    });
+    fs.writeFileSync('public/data/teams.json', JSON.stringify(teams));
+//  res.send(teams);
+  });
+}
 
 // private methods
 function upsertTeams(page, next) {
