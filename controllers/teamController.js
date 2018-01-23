@@ -18,7 +18,7 @@ exports.teams = function(req, res, next) {
         });
       });
     }else{
-      res.send('Fix this later');
+      res.render('noTeams', {request: req});
     }
   }else{
     res.render('home/login', {request: req});
