@@ -6,16 +6,20 @@ exports.teams = function(req, res, next) {
     var numbers = [];
     var nicknames = [];
     var teams = req.user.teams;
-    teams.forEach(function(team){
-      Team.findById(team, function(err, data){
-        numbers.push(data.team_number);
-        nicknames.push(data.nickname);
-        if(numbers.length === teams.length && nicknames.length === teams.length)
-        {
-          res.render('userTeams', {request: req, teams: teams, numbers: numbers, nicknames: nicknames});
-        }
+    if(teams.length > 0){
+      teams.forEach(function(team){
+        Team.findById(team, function(err, data){
+          numbers.push(data.team_number);
+          nicknames.push(data.nickname);
+          if(numbers.length === teams.length && nicknames.length === teams.length)
+          {
+            res.render('userTeams', {request: req, teams: teams, numbers: numbers, nicknames: nicknames});
+          }
+        });
       });
-    });
+    }else{
+      res.send('Fix this later');
+    }
   }else{
     res.render('home/login', {request: req});
   }
