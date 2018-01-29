@@ -13,13 +13,12 @@ passport.use(new GoogleStrategy({
   function(accessToken, refreshToken, profile, done) {
     var updateOptions = { upsert: true, new: true, setDefaultsOnInsert: true };
     var query = { _id: profile.id };
-
     var update = {
       _id: profile.id,
       first_name: profile.name.givenName,
       last_name : profile.name.familyName,
       email: profile.emails[0].value,
-      verification_status: profile._json.verified,
+      verification_status: false,
     };
 
     AppUser.findByIdAndUpdate(query, update, updateOptions, function(err, res){

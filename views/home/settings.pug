@@ -1,0 +1,40 @@
+extends ../layout
+
+block variable
+  -var req = request
+block content  
+  head
+    .jumbotron
+      .kpx_login
+        h3.kpx_authTitle
+          if req.user.first_name
+            p 
+              |First Name: #{req.user.first_name}
+            p
+              |Last Name: #{req.user.last_name}
+          else
+            p 
+              |Email: #{req.user.email}
+          form(action='/settings', method='post')
+            .form-inline
+              p  
+                |Phone Number:
+                input.form-control.mr-sm-2(type='number', aria-label='nums', name = 'num', value=user.mobile, style={width:"200px"})
+            .form-inline
+              p
+                |Get Emails:
+                .pretty.p-icon.p-smooth
+                  input.form-control(type='checkbox', aria-label='emails', name = 'email', checked=user.notification_settings.email.is_enabled)
+                  .state.p-success
+                    i.icon.fa.fa-check
+                    label                     
+            .form-inline
+              p
+                |Get Texts:
+                .pretty.p-icon.p-smooth
+                  input.form-control.mr-sm-2(type='checkbox', aria-label='texts', name = 'text', id='text', checked=user.notification_settings.phone.is_enabled)
+                  .state.p-success
+                    i.icon.fa.fa-check
+                    label            
+            button.btn.btn-lg.btn-primary(type='submit') Save Changes
+    
