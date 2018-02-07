@@ -2,7 +2,7 @@ var appUser = require('../models/appUser');
 
 exports.home = function(req, res, next) {
   console.log(req.user);
-  res.render('home/index', { title: 'Lieberlerts', request: req });
+  res.render('home/index', { title: 'Lieberlerts', request: req});
 };
 
 exports.login = function(req, res, next)  {
