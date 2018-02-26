@@ -26,3 +26,10 @@ exports.send = function(message, subject, email){
     //   console.log(info);
   });
 }
+
+exports.sendText = function(message, subject, email){
+  transporter.sendMail(mail(message, subject, email), function (err, info) {
+     if(err) console.log(err);
+    //   console.log(info);
+  });
+}

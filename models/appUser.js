@@ -8,6 +8,7 @@ var AppUserSchema = new Schema({
   last_name:           { type: String, trim: true },
   email:               { type:String, trim: true },
   mobile:              { type: String, trim: true },
+  carrier:             {type: String, trim: true},
   verification_status: { type: String, required: true, enum: ['Unverified, Verified'], default: 'Unverified' },
   created_at:          { type: Date, default: Date.now },
 

@@ -10,7 +10,6 @@ exports.login = function(req, res, next)  {
 
 exports.logout = function(req, res, next) {
   req.logout();
-  console.log(req.user);
   res.redirect('/');
 }
 
@@ -39,6 +38,7 @@ exports.saveSettings = function(req, res, next) {
     getEmails = false;
   }
   var newNumber = req.body.num;
+  var carrier = req.body.carrier;
   var updateOptions = { upsert: true, new: true, setDefaultsOnInsert: true };
   var query = { _id: req.user.id };
   var update = {
@@ -50,7 +50,8 @@ exports.saveSettings = function(req, res, next) {
         is_enabled: getEmails
       }
     },
-    mobile: newNumber
+    mobile: newNumber,
+    carrier: carrier
   };
 
   appUser.findByIdAndUpdate(query, update, updateOptions, function(err, doc){

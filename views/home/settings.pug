@@ -2,45 +2,52 @@ extends ../layout
 
 block variable
   -var req = request
-block content  
-  head
-    .jumbotron
-      .kpx_login
-        h3.kpx_authTitle
-          if req.user.first_name
-            p 
-              |First Name: #{req.user.first_name}
-            p
-              |Last Name: #{req.user.last_name}
-          else
-            p 
-              |Email: #{req.user.email}
-          form(action='/settings', method='post')
-            .form-group.row
-              label.col-sm-2.col-form-label.col-form-label-lg(for='colFormLabelLg') Phone Number:
-              .col-sm-10
-                input#colFormLabelLg.form-control.form-control-lg(type='number', aria-label='nums', name = 'num', value=user.mobile, style={width:"200px"})
-            .form-group.row
-              label.col-sm-2.col-form-label.col-form-label-lg(for='colFormLabelLg') Get Emails:
-              .col-sm-10
-                .form-check
-                  .pretty.p-icon.p-smooth
-                    input#colFormLabelLg.form-control.form-control-lg(type='checkbox', aria-label='emails', name = 'email', checked=user.notification_settings.email.is_enabled)
-                    .state.p-success
-                      i.icon.fa.fa-check
-                      label      
-            .form-group.row
-              label.col-sm-2.col-form-label.col-form-label-lg(for='colFormLabelLg') Get Texts:
-              .col-sm-10
-                .form-check
-                  .pretty.p-icon.p-smooth
-                    input#colFormLabelLg.form-control.form-control-lg(type='checkbox', aria-label='texts', name = 'text', checked=user.notification_settings.phone.is_enabled)
-                    .state.p-success
-                      i.icon.fa.fa-check
-                      label                                
-            button.btn.btn-lg.btn-primary(type='submit') Save Changes
-            script.
-              var w = window,
-                  x = w.innerWidth;
+block content      
+  .jumbotron
+    .kpx_login
+      h3.kpx_authTitle
+        if req.user.first_name
+          p 
+            |First Name: #{req.user.first_name}
+          p
+            |Last Name: #{req.user.last_name}
+        else
+          p 
+            |Email: #{req.user.email}
+        p(id='width') width
+        form(action='/settings', method='post')
+          .form-group.row
+            label.col-sm-2.col-form-label.col-form-label-lg(for='colFormLabelLg') Phone Number:
+            .col-sm-10
+              input#colFormLabelLg.form-control.form-control-lg(type='number', aria-label='nums', name = 'num', value=user.mobile, style={width:"200px"})
+          .form-group.row  
+            label.col-sm-2.col-form-label.col-form-label-lg(for='colFormLabelLg') Phone Company:
+            .clo-sm-10
+              select.form-control.form-control-lg(name='carrier')
+                option#pit_rating_drive_train_tank_drive(name='carrier', value='AT&T') AT&T
+                option#pit_rating_drive_train_omni_drive(name='carrier', value='Verison') Verison
+                option#pit_rating_drive_train_mecanum_drive(name='carrier', value='T-Mobile') T-Mobile
+                option#pit_rating_drive_train_swerve_drive(name='carrier', value='Sprint') Sprint
+          .form-group.row
+            label.col-sm-2.col-form-label.col-form-label-lg(for='colFormLabelLg') Get Emails:
+            .col-sm-10
+              .form-check
+                .pretty.p-icon.p-smooth
+                  input#colFormLabelLg.form-control.form-control-lg(type='checkbox', aria-label='emails', name = 'email', checked=user.notification_settings.email.is_enabled)
+                  .state.p-success
+                    i.icon.fa.fa-check
+                    label      
+          .form-group.row
+            label.col-sm-2.col-form-label.col-form-label-lg(for='colFormLabelLg') Get Texts:
+            .col-sm-10
+              .form-check
+                .pretty.p-icon.p-smooth
+                  input#colFormLabelLg.form-control.form-control-lg(type='checkbox', aria-label='texts', name = 'text', checked=user.notification_settings.phone.is_enabled)
+                  .state.p-success
+                    i.icon.fa.fa-check
+                    label   
+            p.col-sm-2.col-form-label.col-form-label-sm Different Numbers are used for texts                         
+          button.btn.btn-lg.btn-primary(type='submit') Save Changes
+          
                
     

@@ -59,7 +59,7 @@ var upcomingMatch = function(msg){
   }
   //adds all the info into the email body
   email += "\nThe event is at " + msg.message_data.event_name+".\nThe event is scheduled for "+hours+":"+add0Min+minuites+":"+add0Sec+seconds+time;
-  sendEmails(teamList, email, subject)
+  sendEmails(teamList, email, subject);
 };
 
 var matchScore = function(msg){
@@ -83,7 +83,7 @@ var matchScore = function(msg){
   teams.forEach(function(team){
     var nonKeyTeam = team.substring(3);
     subject += nonKeyTeam + ", ";
-    teamList.push(team);
+    teamList.push(nonKeyTeam);
   });
   teams = msg.message_data.match.alliances.red.teams;
   teams.forEach(function(team){
@@ -113,18 +113,40 @@ var matchScore = function(msg){
 
 var sendEmails = function(teamList, email, subject){
   var usersSent = [];
+  var textsSent = [];
   teamList.forEach(function(team){
-    appUser.find({teams: team}, function(err, data){
+    appUser.find({teams: 'frc'+team}, function(err, data){
       data.forEach(function(user){
         var send = true;
+        var sendText = true;
         usersSent.forEach(function(sentUsers){
           if(sentUsers === user.email){
             send = false;
           }
         })
+        textsSent.forEach(function(sentUsers){
+          if(sentUsers === user.email){
+            sendText = false;
+          }
+        })
         if(send && user.notification_settings.email.is_enabled){
           usersSent.push(user.email);
           sender.send(email, subject, user.email);
+        }
+        if(sendText && user.notification_settings.phone.is_enabled){
+          textsSent.push(user.email);
+          var carrierEmail;
+          if(user.carrier === 'AT&T'){
+            carrierEmail = '@txt.att.net';
+          }else if(user.carrier === 'T-Mobile'){
+            carrierEmail = '@tmomail.net';
+          }else if(user.carrier === 'Verison'){
+            carrierEmail = '@vtext.com';
+          }else if(user.carrier === 'Sprint'){
+            carrierEmail = '@messaging.sprintpcs.com';
+          }
+          var number = user.mobile;
+          sender.sendText(email, subject, number+carrierEmail);
         }
       })
     });
