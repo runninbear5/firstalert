@@ -23,11 +23,12 @@ block content
           .form-group.row  
             label.col-sm-2.col-form-label.col-form-label-lg(for='colFormLabelLg') Phone Company:
             .clo-sm-10
-              select.form-control.form-control-lg(name='carrier')
-                option#pit_rating_drive_train_tank_drive(name='carrier', value='AT&T') AT&T
-                option#pit_rating_drive_train_omni_drive(name='carrier', value='Verison') Verison
-                option#pit_rating_drive_train_mecanum_drive(name='carrier', value='T-Mobile') T-Mobile
-                option#pit_rating_drive_train_swerve_drive(name='carrier', value='Sprint') Sprint
+              select.form-control.form-control-lg(name='carrier', value='AT&T')
+                option(name='carrier', id='None', value='None') None
+                option(name='carrier', id='AT&T', value='AT&T') AT&T
+                option(name='carrier', id='Verison', value='Verison') Verison
+                option(name='carrier', id='T-Mobile', value='T-Mobile') T-Mobile
+                option(name='carrier', id='Sprint', value='Sprint') Sprint
           .form-group.row
             label.col-sm-2.col-form-label.col-form-label-lg(for='colFormLabelLg') Get Emails:
             .col-sm-10
@@ -48,6 +49,6 @@ block content
                     label   
             p.col-sm-2.col-form-label.col-form-label-sm Different Numbers are used for texts                         
           button.btn.btn-lg.btn-primary(type='submit') Save Changes
-          
+               
                
     

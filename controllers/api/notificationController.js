@@ -29,7 +29,7 @@ var upcomingMatch = function(msg){
     var nonKeyTeam = team.substring(3);//gets the team numbers
     subject += nonKeyTeam + ", ";
     email += nonKeyTeam + ", ";
-    teamList.push(team);//puts to array
+    teamList.push(nonKeyTeam);//puts to array
   });
   //puts the time into readable format
   var time = "";
@@ -59,7 +59,7 @@ var upcomingMatch = function(msg){
   }
   //adds all the info into the email body
   email += "\nThe event is at " + msg.message_data.event_name+".\nThe event is scheduled for "+hours+":"+add0Min+minuites+":"+add0Sec+seconds+time;
-  sendEmails(teamList, email, subject);
+  sendEmails(teamList, email, subject, email);
 };
 
 var matchScore = function(msg){
@@ -67,15 +67,19 @@ var matchScore = function(msg){
   var winningTeam = "";
   var redScore = msg.message_data.match.alliances.red.score;
   var blueScore = msg.message_data.match.alliances.blue.score;
+  var textMessage = "The event and match is " +msg.message_data.event_name + " " + msg.message_data.match.match_number + ".\n";
   var email = "The event name is " +msg.message_data.event_name+" and the match number is "+msg.message_data.match.match_number+".\n";
   var subject = "Match Score for Teams ";
   //checks condition for what to say
   if(blueScore > redScore){
     email += "The blue team won with a score of " +blueScore+ " to " +redScore+".\n";
+    textMessage += "Blue won. Score of " +blueScore+ " to " + redScore + ".\n";
   }else if(redScore > blueScore){
     email += "The red team won with a score of " +redScore+ " to " +blueScore+".\n";
+    textMessage += "Red won. Score of " +redScore+ " to " + blueScore + ".\n";
   }else{
     email += "The teams tied with a score of " +redScore+".\n";
+    textMessage += "Tie. Score of " +blueScore+".\n";
   }
   //adds the team numbers to teamList
   var teams = msg.message_data.match.alliances.blue.teams;
@@ -92,26 +96,32 @@ var matchScore = function(msg){
     teamList.push(nonKeyTeam);
   });
   //prints the teams on the email
+  textMessage += "Teams on blue: ";
   email += "The teams on blue alliance are ";
   for(var i=0; i<3; i++){
     if(i<2){
+      textMessage += teamList[i] + ", ";
       email += teamList[i] + ", ";
     }else if(i===2){
+      textMessage += teamList[i] +".\n";
       email += teamList[i] +".\n";
     }
   }
+  textMessage += "Teams on red: ";
   email += "The teams on red alliance are ";
   for(var i=3; i<6; i++){
     if(i<5){
+      textMessage += teamList[i] + ", ";
       email += teamList[i] + ", ";
     }else if(i===5){
+      textMessage += teamList[i] +".\n";
       email += teamList[i] +".\n";
     }
   }
-  sendEmails(teamList, email, subject)
+  sendEmails(teamList, email, subject, textMessage)
 };
 
-var sendEmails = function(teamList, email, subject){
+var sendEmails = function(teamList, email, subject, textMessage){
   var usersSent = [];
   var textsSent = [];
   teamList.forEach(function(team){
@@ -137,16 +147,16 @@ var sendEmails = function(teamList, email, subject){
           textsSent.push(user.email);
           var carrierEmail;
           if(user.carrier === 'AT&T'){
-            carrierEmail = '@txt.att.net';
+            carrierEmail = '@mms.att.net';
           }else if(user.carrier === 'T-Mobile'){
             carrierEmail = '@tmomail.net';
           }else if(user.carrier === 'Verison'){
-            carrierEmail = '@vtext.com';
+            carrierEmail = '@@vzwpix.com';
           }else if(user.carrier === 'Sprint'){
-            carrierEmail = '@messaging.sprintpcs.com';
+            carrierEmail = '@pm.sprint.com';
           }
           var number = user.mobile;
-          sender.sendText(email, subject, number+carrierEmail);
+          sender.sendText(textMessage, subject, number+carrierEmail);
         }
       })
     });
