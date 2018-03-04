@@ -11,7 +11,7 @@ exports.tbaNotify = function(req, res){
   }else if(msg.message_type === "match_score"){
     matchScore(msg);
   }
-//  res.send("good");
+  res.send("good");
 };
 
 var verification = function(msg){
