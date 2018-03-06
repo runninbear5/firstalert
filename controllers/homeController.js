@@ -1,11 +1,11 @@
 var appUser = require('../models/appUser');
 
 exports.home = function(req, res, next) {
-  res.render('home/index', { title: 'Lieberlerts', request: req});
+  res.render('home/index', { title: 'FIRST Alert', request: req});
 };
 
 exports.login = function(req, res, next)  {
-  res.render('home/login', { title: 'Lieberlerts', request: req});
+  res.render('home/login', { title: 'FIRST Alert', request: req});
 };
 
 exports.logout = function(req, res, next) {
