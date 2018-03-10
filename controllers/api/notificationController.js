@@ -37,6 +37,7 @@ var upcomingMatch = function(msg){
   var date = new Date(currentMilli*1000);
   // var timeOffset = new Date().getTimezoneOffset() / 60;
   var hours = date.getHours() - 8;
+  console.log(hours);
   var seconds = date.getSeconds();
   var minuites = date.getMinutes();
   if(hours>12){
@@ -56,7 +57,7 @@ var upcomingMatch = function(msg){
       add0Sec = "";
   }
   //adds all the info into the email body
-  email += "\nThe event is at " + msg.message_data.event_name+".\nThe event is scheduled for "+hours+":"+add0Min+minuites+":"+add0Sec+seconds+time;
+  email += "\nThe event is at " + msg.message_data.event_name+".\nThe event is scheduled for "+hours+":"+add0Min+minuites+":"+add0Sec+seconds+time+" PCT";
   sendEmails(teamList, email, subject, email);
 };
 
