@@ -37,7 +37,6 @@ var upcomingMatch = function(msg){
   var date = new Date(currentMilli*1000);
   // var timeOffset = new Date().getTimezoneOffset() / 60;
   var hours = date.getHours() - 8;
-  console.log(timeOffset);
   var seconds = date.getSeconds();
   var minuites = date.getMinutes();
   if(hours>12){
