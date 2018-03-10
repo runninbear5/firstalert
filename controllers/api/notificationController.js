@@ -33,10 +33,10 @@ var upcomingMatch = function(msg){
   });
   //puts the time into readable format
   var time = "";
-  var currentMilli = msg.message_data.scheduled_time;
+  var currentMilli = msg.message_data.predicted_time;
   var date = new Date(currentMilli*1000);
-  var timeOffset = new Date().getTimezoneOffset() / 60;
-  var hours = date.getHours() - timeOffset;
+  // var timeOffset = new Date().getTimezoneOffset() / 60;
+  var hours = date.getHours() - 8;
   console.log(timeOffset);
   var seconds = date.getSeconds();
   var minuites = date.getMinutes();
