@@ -34,25 +34,24 @@ var upcomingMatch = function(msg){
   //puts the time into readable format
   var time = "";
   var currentMilli = msg.message_data.scheduled_time;
-  var seconds =  ((currentMilli/1000) % 60);
-  var add0Min = "0";
-  var add0Sec = "0";
-  var minuites = ((currentMilli/(1000*60)) % 60);
-  var hours =  ((currentMilli/(1000*60*60)) % 12);
-  seconds = Math.round(seconds);
-  minuites = Math.round(minuites);
-  hours = Math.round(hours);
-  if((currentMilli/(1000*60*60)) % 24 > 12){
-      time = " am";
+  var date = new Date(currentMilli*1000);
+  var timeOffset = new Date().getTimezoneOffset() / 60;
+  var hours = date.getHours() - timeOffset;
+  console.log(timeOffset);
+  var seconds = date.getSeconds();
+  var minuites = date.getMinutes();
+  if(hours>12){
+    hours = hours-12;
+    time = " pm";
   }else{
-      time = " pm";
+    time = " am";
   }
-  if(((currentMilli/(1000*60)) % 60) < 10){
+  if(minuites < 10){
      add0Min = "0";
   }else{
       add0Min = "";
   }
-  if(((currentMilli/(1000)) % 60) < 10){
+  if(seconds < 10){
      add0Sec = "0";
   }else{
       add0Sec = "";
