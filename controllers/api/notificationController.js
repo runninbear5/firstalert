@@ -150,8 +150,8 @@ var sendEmails = function(teamList, email, subject, textMessage){
             carrierEmail = '@mms.att.net';
           }else if(user.carrier === 'T-Mobile'){
             carrierEmail = '@tmomail.net';
-          }else if(user.carrier === 'Verison'){
-            carrierEmail = '@@vzwpix.com';
+          }else if(user.carrier === 'Verizon' || user.carrier === 'Verison'){
+            carrierEmail = '@vzwpix.com';
           }else if(user.carrier === 'Sprint'){
             carrierEmail = '@pm.sprint.com';
           }
