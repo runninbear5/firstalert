@@ -40,14 +40,14 @@ var upcomingMatch = function(msg){
   var hours = date.getHours()-8;
   console.log(hours);
   var seconds = date.getSeconds();
-  var minuites = date.getMinutes();
+  var minutes = date.getMinutes();
   if(hours>12){
     hours = hours-12;
     time = " pm";
   }else{
     time = " am";
   }
-  if(minuites < 10){
+  if(minutes < 10){
      add0Min = "0";
   }else{
       add0Min = "";
@@ -58,7 +58,7 @@ var upcomingMatch = function(msg){
       add0Sec = "";
   }
   //adds all the info into the email body
-  email += "\nThe event is at " + msg.message_data.event_name+".\nThe match is starting in a few minuites.";//"\nThe event is scheduled for "+hours+":"+add0Min+minuites+":"+add0Sec+seconds+time+" PCT";
+  email += "\nThe event is at " + msg.message_data.event_name+".\nThe match is starting in a few minutes.";//"\nThe event is scheduled for "+hours+":"+add0Min+minutes+":"+add0Sec+seconds+time+" PCT";
   sendEmails(teamList, email, subject, email);
 };
 

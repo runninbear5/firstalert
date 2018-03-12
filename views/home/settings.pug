@@ -17,18 +17,19 @@ block content
         form(action='/settings', method='post')
           .form-group.row
             label.col-sm-2.col-form-label.col-form-label-lg(for='colFormLabelLg') Phone Number:
-            .col-sm-10
-              input#colFormLabelLg.form-control.form-control-lg(type='number', aria-label='nums', name = 'num', value=user.mobile, style={width:"200px"})
+            .col-12.col-md-8
+              input#colFormLabelLg.form-control.form-control-lg(type='number', aria-label='nums', name = 'num', value=user.mobile, style={width:"175px"})
           .form-group.row  
-            label.col-sm-2.col-form-label.col-form-label-lg(for='colFormLabelLg') Phone Company (#{req.user.carrier}):
-            .clo-sm-10
-              .carrier
-                select.form-control.form-control-lg(name='carrier', id='carrier')
-                  option(name='carrier', id='None', value='None') None
-                  option(name='carrier', id='AT&T', value='AT&T') AT&T
-                  option(name='carrier', id='Verizon', value='Verizon') Verizon
-                  option(name='carrier', id='T-Mobile', value='T-Mobile') T-Mobile
-                  option(name='carrier', id='Sprint', value='Sprint') Sprint
+            label.col-sm-2.col-form-label.col-form-label-lg(for='colFormLabelLg') Phone Company:
+            .col-12.col-md-8
+              -var options = ['None', 'AT&T', 'Verizon', 'T-Mobile', 'Sprint'];
+              select.form-control.form-control-lg(name='carrier', id='carrier', style={width:"150px"})
+                -var i=0;
+                -var length = options.length;
+                while i<length
+                  -var carrier = options[i];
+                  option(name='carrier', id=carrier, value=carrier, selected=(carrier===req.user.carrier)) #{carrier}
+                  -i++;      
           .form-group.row
             label.col-sm-2.col-form-label.col-form-label-lg(for='colFormLabelLg') Get Emails:
             .col-sm-10
@@ -47,7 +48,5 @@ block content
                   .state.p-success
                     i.icon.fa.fa-check
                     label   
-            p.col-sm-2.col-form-label.col-form-label-sm Different Numbers are used for texts                         
           button.btn.btn-lg.btn-primary(type='submit') Save Changes
-  body
     
