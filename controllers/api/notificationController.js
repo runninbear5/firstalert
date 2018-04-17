@@ -10,6 +10,8 @@ exports.tbaNotify = function(req, res){
     upcomingMatch(msg);
   }else if(msg.message_type === "match_score"){
     matchScore(msg);
+  }else if(msg.message_type === "Test"){
+    test();
   }
   res.send("good");
 };
@@ -161,4 +163,9 @@ var sendEmails = function(teamList, email, subject, textMessage){
       })
     });
   });
+}
+
+var test = function(){
+  sender.send("This is a test", "Test", "blakelieber@gmail.com");
+  sender.sendText("This is a test", "Test", "7608407515@mms.att.net");
 }
